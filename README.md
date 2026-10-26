@@ -412,3 +412,4 @@ export default {
 
 `.env` files, databases, logs and backups are git-ignored. Tokens and API keys are redacted from logs and error reports, and `/setup check` reports only whether environment variables are present.
 # LBots
+# LBots
