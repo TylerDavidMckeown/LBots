@@ -1,0 +1,52 @@
+# Docker Compose alternative to PM2. Do not run both for the same bots.
+#   docker compose up -d --build       start all four
+#   docker compose restart community   restart one bot
+# Each bot reads its own .env and keeps its database in a bind-mounted data/ folder.
+
+x-bot: &bot
+  build: .
+  image: lyss-tools:latest
+  restart: unless-stopped
+  read_only: true
+  tmpfs: [/tmp]
+  security_opt: [no-new-privileges:true]
+  cap_drop: [ALL]
+  stop_grace_period: 15s
+  environment:
+    BACKUP_DIR: /app/backups
+  logging:
+    driver: json-file
+    options: { max-size: 10m, max-file: '3' }
+
+services:
+  tickets:
+    <<: *bot
+    command: ["node", "tickets-bot/src/index.js"]
+    env_file: tickets-bot/.env
+    volumes:
+      - ./tickets-bot/data:/app/tickets-bot/data
+      - ./backups:/app/backups
+
+  guard:
+    <<: *bot
+    command: ["node", "guard-bot/src/index.js"]
+    env_file: guard-bot/.env
+    volumes:
+      - ./guard-bot/data:/app/guard-bot/data
+      - ./backups:/app/backups
+
+  community:
+    <<: *bot
+    command: ["node", "community-bot/src/index.js"]
+    env_file: community-bot/.env
+    volumes:
+      - ./community-bot/data:/app/community-bot/data
+      - ./backups:/app/backups
+
+  ai:
+    <<: *bot
+    command: ["node", "ai-bot/src/index.js"]
+    env_file: ai-bot/.env
+    volumes:
+      - ./ai-bot/data:/app/ai-bot/data
+      - ./backups:/app/backups

@@ -1,0 +1,16 @@
+{
+  "name": "@lyss/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared foundation for every Lyss Tools bot.",
+  "exports": {
+    "./*": "./src/*"
+  },
+  "dependencies": {
+    "better-sqlite3": "13.0.3",
+    "discord.js": "14.27.0",
+    "dotenv": "18.0.9",
+    "luxon": "3.7.2"
+  }
+}

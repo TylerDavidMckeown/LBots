@@ -1,0 +1,31 @@
+{
+  "name": "lyss-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Lyss Tools: four independent Discord bots (Lyss Tickets, Lyss Guard, Lyss Community, ALYSS) in one monorepo.",
+  "workspaces": [
+    "shared",
+    "tickets-bot",
+    "guard-bot",
+    "community-bot",
+    "ai-bot"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node scripts/check.js",
+    "start:tickets": "npm start -w tickets-bot",
+    "start:guard": "npm start -w guard-bot",
+    "start:community": "npm start -w community-bot",
+    "start:ai": "npm start -w ai-bot",
+    "deploy:tickets": "npm run deploy -w tickets-bot",
+    "deploy:guard": "npm run deploy -w guard-bot",
+    "deploy:community": "npm run deploy -w community-bot",
+    "deploy:ai": "npm run deploy -w ai-bot",
+    "deploy:all": "npm run deploy --workspaces --if-present",
+    "backup": "node scripts/backup.js"
+  }
+}

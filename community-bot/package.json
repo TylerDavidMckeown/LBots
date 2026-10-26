@@ -1,0 +1,16 @@
+{
+  "name": "community-bot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Lyss Community: community management and the Lyss game world.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "deploy": "node src/deploy-commands.js"
+  },
+  "dependencies": {
+    "@lyss/shared": "0.1.0",
+    "discord.js": "14.27.0"
+  }
+}
